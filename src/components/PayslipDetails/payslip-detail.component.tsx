@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useSpring, animated } from "react-spring";
-import { FaArrowLeft, FaFileInvoice } from "react-icons/fa";
+import { FaArrowLeft, FaCalendar, FaFileInvoice } from "react-icons/fa";
 import { Capacitor } from "@capacitor/core";
 import { Directory, Filesystem } from "@capacitor/filesystem";
 import { Share } from "@capacitor/share";
@@ -105,9 +105,13 @@ const PayslipDetails: React.FC = () => {
         </button>
         <h1>Payslip Details</h1>
         <div className="details-section">
-          {renderDetails("ID", payslip.id)}
-          {renderDetails("From Date", payslip.fromDate)}
-          {renderDetails("To Date", payslip.toDate)}
+          {renderDetails("ID", payslip.id, <FaFileInvoice size={32} />)}
+          {renderDetails(
+            "From Date",
+            payslip.fromDate,
+            <FaCalendar size={32} />
+          )}
+          {renderDetails("To Date", payslip.toDate, <FaCalendar size={32} />)}
         </div>
         <button onClick={downloadPayslip} className="download-button">
           {loading ? "Downloading..." : "Download Payslip"}
@@ -119,10 +123,10 @@ const PayslipDetails: React.FC = () => {
   );
 };
 
-const renderDetails = (label: string, value: string) => (
+const renderDetails = (label: string, value: string, icon: JSX.Element) => (
   <div className="flex-box items-center">
     <div className="w-50 flex-box justify-start gap-7 items-center">
-      <FaFileInvoice size={32} /> {label}
+      {icon} {label}
     </div>
     <div className="w-50 flex-box justify-start">{value}</div>
   </div>

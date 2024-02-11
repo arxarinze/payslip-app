@@ -1,0 +1,68 @@
+.paydetail-container {
+    width       : 100%;
+    overflow-x  : hidden;
+    padding-left: 15px;
+}
+
+.flex-box {
+    display: flex;
+}
+
+.justify-start {
+    justify-content: start;
+}
+
+.items-center {
+    align-items: center;
+}
+
+.gap-7 {
+    gap: 7px;
+}
+
+.w-50 {
+    width: 50%;
+
+}
+
+.back-button {
+    display        : flex;
+    align-items    : center;
+    justify-content: center;
+    height         : 32px;
+    margin-top     : 15px;
+    background     : black;
+    color          : white;
+    gap            : 3px;
+    border-radius  : 20px;
+}
+
+
+h1 {
+    margin-top: 1rem;
+}
+
+.details-section {
+    margin-top    : 1rem;
+    display       : flex;
+    flex-direction: column;
+    gap           : 7px
+}
+
+.details-section p {
+    margin-bottom: 0.5rem;
+}
+
+.date-section span {
+    margin-left: 1rem;
+}
+
+.download-button {
+    width           : 92%;
+    height          : 47px;
+    background-color: #2ecc71;
+    color           : #fff;
+    border          : none;
+    cursor          : pointer;
+    margin-top      : 1rem;
+}

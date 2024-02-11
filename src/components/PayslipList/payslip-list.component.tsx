@@ -2,14 +2,12 @@ import React from "react";
 import { animated, useTrail } from "react-spring";
 import { useNavigate } from "react-router-dom";
 import "./PayslipList.css";
-import Payslip from "../../models/payslip.model";
 import PayslipCard from "./payslip-card.component";
+import { usePayslipContext } from "../../context/payslip.provider";
 
-interface PayslipListProps {
-  payslips: Payslip[];
-}
-
-const PayslipList: React.FC<PayslipListProps> = ({ payslips }) => {
+const PayslipList: React.FC = () => {
+  const { payslipService } = usePayslipContext();
+  const payslips = payslipService.getAllPayslips();
   const navigate = useNavigate();
 
   const trail = useTrail(payslips.length, {

@@ -25,6 +25,11 @@
 
 }
 
+.w-30 {
+    width: 30%;
+
+}
+
 .back-button {
     display        : flex;
     align-items    : center;
@@ -58,11 +63,14 @@ h1 {
 }
 
 .download-button {
-    width           : 92%;
     height          : 47px;
     background-color: #2ecc71;
     color           : #fff;
     border          : none;
     cursor          : pointer;
     margin-top      : 1rem;
+}
+
+.download-button_container {
+    display:flex;
 }

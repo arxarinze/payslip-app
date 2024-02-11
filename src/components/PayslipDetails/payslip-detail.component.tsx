@@ -113,9 +113,11 @@ const PayslipDetails: React.FC = () => {
           )}
           {renderDetails("To Date", payslip.toDate, <FaCalendar size={32} />)}
         </div>
-        <button onClick={downloadPayslip} className="download-button">
-          {loading ? "Downloading..." : "Download Payslip"}
-        </button>
+        <div className="download-button_container">
+          <button onClick={downloadPayslip} className="download-button">
+            {loading ? "Downloading..." : "Download Payslip"}
+          </button>
+        </div>
       </div>
     </animated.div>
   ) : (
@@ -125,7 +127,7 @@ const PayslipDetails: React.FC = () => {
 
 const renderDetails = (label: string, value: string, icon: JSX.Element) => (
   <div className="flex-box items-center">
-    <div className="w-50 flex-box justify-start gap-7 items-center">
+    <div className="w-30 flex-box justify-start gap-7 items-center">
       {icon} {label}
     </div>
     <div className="w-50 flex-box justify-start">{value}</div>

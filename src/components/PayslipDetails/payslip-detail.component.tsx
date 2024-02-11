@@ -66,7 +66,7 @@ const PayslipDetails: React.FC = () => {
       });
     } catch (error) {
       console.error("Error downloading mobile payslip:", error);
-      Capacitor.Plugins.Toast.show({
+      Toast.show({
         text: "Error downloading payslip. Please try again.",
         duration: "short",
       });

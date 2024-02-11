@@ -37,7 +37,7 @@ A comprehensive and modern application for managing and viewing payslips. This p
 npm install
 ```
 
-## Usage
+## Usage (If developpment environment is setup alredy)
 
 - To build and sync:
 

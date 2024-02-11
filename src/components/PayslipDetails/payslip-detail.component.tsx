@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useSpring, animated } from "react-spring";
 import { FaArrowLeft, FaFileInvoice } from "react-icons/fa";
@@ -18,12 +18,16 @@ const PayslipDetails: React.FC = () => {
   const isMobilePlatform = Capacitor.isNativePlatform();
   const navigate = useNavigate();
 
+  const [loading, setLoading] = useState(false); // State for managing loading
+
   const downloadPayslip = async () => {
-    if (!payslip || !payslip.file) {
+    if (!payslip || !payslip.file || loading) {
       return;
     }
 
     try {
+      setLoading(true); // Set loading to true before the download operation
+
       if (isMobilePlatform) {
         await downloadMobilePayslip(payslip);
       } else {
@@ -31,6 +35,8 @@ const PayslipDetails: React.FC = () => {
       }
     } catch (error) {
       console.error("Error handling payslip download:", error);
+    } finally {
+      setLoading(false); // Set loading to false after the download operation completes
     }
   };
 
@@ -83,7 +89,7 @@ const PayslipDetails: React.FC = () => {
           {renderDetails("To Date", payslip.toDate)}
         </div>
         <button onClick={downloadPayslip} className="download-button">
-          Download Payslip
+          {loading ? "Downloading..." : "Download Payslip"}
         </button>
       </div>
     </animated.div>

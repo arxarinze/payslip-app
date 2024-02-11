@@ -7,6 +7,7 @@ import { Directory, Filesystem } from "@capacitor/filesystem";
 import { Share } from "@capacitor/share";
 import { convertImageToBase64 } from "../../utils/utils";
 import { usePayslipContext } from "../../context/payslip.provider";
+import { Toast } from "@capacitor/toast";
 import "./PayslipDetails.css";
 import Payslip from "../../models/payslip.model";
 
@@ -18,7 +19,7 @@ const PayslipDetails: React.FC = () => {
   const isMobilePlatform = Capacitor.isNativePlatform();
   const navigate = useNavigate();
 
-  const [loading, setLoading] = useState(false); // State for managing loading
+  const [loading, setLoading] = useState(false);
 
   const downloadPayslip = async () => {
     if (!payslip || !payslip.file || loading) {
@@ -26,7 +27,7 @@ const PayslipDetails: React.FC = () => {
     }
 
     try {
-      setLoading(true); // Set loading to true before the download operation
+      setLoading(true);
 
       if (isMobilePlatform) {
         await downloadMobilePayslip(payslip);
@@ -35,33 +36,53 @@ const PayslipDetails: React.FC = () => {
       }
     } catch (error) {
       console.error("Error handling payslip download:", error);
+      Toast.show({
+        text: "Error downloading payslip. Please try again.",
+        duration: "short",
+      });
     } finally {
-      setLoading(false); // Set loading to false after the download operation completes
+      setLoading(false);
     }
   };
 
   const downloadMobilePayslip = async (payslip: Payslip) => {
-    const base64 = await convertImageToBase64(`/${payslip.file}`);
-    await Filesystem.writeFile({
-      path: payslip.file,
-      data: base64 as string,
-      directory: Directory.Documents,
-      recursive: true,
-    });
-    const { uri } = await Filesystem.getUri({
-      directory: Directory.Documents,
-      path: payslip.file,
-    });
+    try {
+      const base64 = await convertImageToBase64(`/${payslip.file}`);
+      await Filesystem.writeFile({
+        path: payslip.file,
+        data: base64 as string,
+        directory: Directory.Documents,
+        recursive: true,
+      });
+      const { uri } = await Filesystem.getUri({
+        directory: Directory.Documents,
+        path: payslip.file,
+      });
 
-    await Share.share({
-      title: "Download Payslip",
-      url: uri,
-      dialogTitle: "Download Payslip",
-    });
+      await Share.share({
+        title: "Download Payslip",
+        url: uri,
+        dialogTitle: "Download Payslip",
+      });
+    } catch (error) {
+      console.error("Error downloading mobile payslip:", error);
+      Capacitor.Plugins.Toast.show({
+        text: "Error downloading payslip. Please try again.",
+        duration: "short",
+      });
+    }
   };
 
   const downloadWebPayslip = (payslip: Payslip) => {
-    window.open(payslip.file, "_blank");
+    try {
+      window.open(payslip.file, "_blank");
+    } catch (error) {
+      console.error("Error opening file:", error);
+      Capacitor.Plugins.Toast.show({
+        text: "Error opening payslip. Please try again.",
+        duration: "short",
+      });
+    }
   };
 
   const props = useSpring({ opacity: 1, from: { opacity: 0 } });

@@ -1,0 +1,113 @@
+.payslip-container {
+    width         : 90%;
+    overflow-x    : hidden;
+    padding-left  : 15px;
+    display       : flex;
+    flex-direction: column;
+    align-items   : center;
+}
+
+.payslip-list {
+    list-style     : none;
+    padding        : 0;
+    display        : flex;
+    flex-wrap      : wrap;
+    justify-content: center;
+    flex-direction : column;
+    gap            : 14px;
+}
+
+.payslip-card {
+    background-color: #fff;
+    border-radius   : 8px;
+    box-shadow      : 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding         : 16px;
+    width           : 300px;
+    text-align      : center;
+    position        : relative;
+
+    transition: transform 0.3s ease-in-out;
+
+    &:hover {
+        transform: scale(1.05);
+    }
+}
+
+.payslip-image {
+    width        : 50%;
+    border-radius: 8px;
+    margin-bottom: 16px;
+}
+
+.payslip-details {
+    display        : flex;
+    flex-direction : row;
+    align-items    : center;
+    justify-content: space-between;
+}
+
+.payslip-id-badge {
+    position: absolute;
+    top     : 8px;
+    right   : 8px;
+}
+
+.divider {
+    height    : 15px;
+    width     : 1px;
+    background: gray;
+}
+
+.small {
+    font-size: small;
+}
+
+
+.badge {
+    background-color: black;
+    color           : #fff;
+    padding         : 6px 12px;
+    border-radius   : 4px;
+}
+
+
+.date-container {
+    margin-bottom  : 8px;
+    display        : flex;
+    flex-direction : row;
+    align-items    : center;
+    gap            : 3px;
+    justify-content: space-around;
+}
+
+.date-label {
+    font-weight: bold;
+    display    : flex;
+    align-items: center;
+    display    : flex;
+    gap        : 1px;
+}
+
+.date-value_contianer {
+    display       : flex;
+    flex-direction: column;
+    align-items   : start;
+}
+
+.date-value {
+    margin-top: 4px;
+}
+
+.download-button {
+    background-color: #28a745;
+    color           : #fff;
+    padding         : 8px 16px;
+    border          : none;
+    border-radius   : 4px;
+    cursor          : pointer;
+    transition      : background-color 0.3s ease;
+
+    &:hover {
+        background-color: #218838;
+    }
+}
